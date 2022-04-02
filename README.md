@@ -19,3 +19,23 @@ Backend:
 Database: 
 
   - MySQL + Sequalize ORM
+
+
+
+
+## Starting project
+
+### Web Client
+
+Run `yarn start`
+
+
+### Backend
+
+Install docker desktop
+
+Create a .env file and use your password
+
+In root server directory run `docker-compose up`
+
+Go to the adminer page (`localhost:9000`) and manually create a database with the name `shop`
