@@ -2,7 +2,9 @@ import express, {Request, Response , Application} from 'express';
 import logging from "./logging";
 import config from './config';
 import * as bodyParser from 'body-parser';
-import cors from 'cors';
+const cors = require('cors');
+
+const sequelize = require('./configs/sequelize/connection');
 
 const app: Application = express();
 
@@ -18,6 +20,8 @@ app.use(function (req: Request, res: Response, next) {
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
+
+sequelize.authenticate().then(() => console.log("Merge"));
 
 app.use('*', (req, res) => res.status(404).json({message: "Pagina nu a fost gasita"}));
 
