@@ -21,7 +21,14 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
-sequelize.authenticate().then(() => console.log("Merge"));
+sequelize.authenticate().then(async () => {
+  console.log("database connected")
+  //try{
+   // await sequelize.sync({force: true})
+  //}catch(error){
+   // console.log(error)
+  //}
+});
 
 app.use('*', (req, res) => res.status(404).json({message: "Pagina nu a fost gasita"}));
 
