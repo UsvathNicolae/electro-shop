@@ -30,6 +30,11 @@ Database:
 Run `yarn start`
 
 
+### Mobile Client
+
+Run `yarn start`
+
+
 ### Backend
 
 Install docker desktop
