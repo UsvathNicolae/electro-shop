@@ -32,6 +32,7 @@ const SEED_USERS = [
     {
         username: "Mircea",
         password: 'parola',
+        email: 'john@gmail.com',
         productIds: "1,2",
         createdAt: new Date(),
         updatedAt: new Date()
@@ -39,6 +40,7 @@ const SEED_USERS = [
     {
         username: "Marcus",
         password: 'parola12',
+        email: 'johnn@gmail.com',
         productIds: "1,3",
         createdAt: new Date(),
         updatedAt: new Date()
@@ -46,6 +48,7 @@ const SEED_USERS = [
     {
         username: "Varodi",
         password: 'parola12',
+        email: 'johnnn@gmail.com',
         productIds: "3",
         createdAt: new Date(),
         updatedAt: new Date()

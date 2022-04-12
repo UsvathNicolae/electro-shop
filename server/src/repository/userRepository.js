@@ -6,6 +6,10 @@ const fetchAllUsers = () => {
     return USER.findAll({ attributes: { exclude: ['createdAt','updatedAt'] } });
 }
 
+const fetchUserByEmail = (email) => {
+    return USER.findOne({where: { email: email }});
+}
+
 const postUserDB = (payload) => {
     return USER.create(payload);
 }
@@ -18,5 +22,5 @@ const deleteUserDB = (id) => {
     return USER.destroy({where: { id: id }});
 }
 
-module.exports = { fetchAllUsers, postUserDB, putUserDB, deleteUserDB }
+module.exports = { fetchAllUsers, postUserDB, putUserDB, deleteUserDB, fetchUserByEmail }
 
