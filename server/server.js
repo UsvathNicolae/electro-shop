@@ -2,8 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 const sequelize = require('./src/configs/sequelize/connection');
+const userRoute = require('./src/routes/userRoute');
+const productRoute = require('./src/routes/productRoute');
 
 const app = express();
 dotenv.config();
@@ -17,6 +20,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(morgan('dev'))
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
@@ -29,8 +33,23 @@ sequelize
     .then(() => console.log('Connection to database has been established successfully.'))
     .catch((err) => console.error(err));
 
-app.use('*', (req, res) => res.status(404).json({message: "Invalid route"}));
+
+app.use('/user', userRoute);
+app.use('/product', productRoute);
 
 app.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`);
 });
+
+//err
+app.use('*', (req, res, next) => {
+    const error = new Error("Not found");;
+    error.code = 404;
+    next(error);
+});
+
+app.use('*', (err, req, res, next) => {
+    res.status(err.code).json({
+        message: err.message
+    })
+})

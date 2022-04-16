@@ -2,7 +2,7 @@
 
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('User', {
+    return queryInterface.createTable('Users', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -16,11 +16,31 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      role:{
+        type: Sequelize.ENUM,
+        values: ['USER', 'ADMIN'],
+        defaultValue: 'USER',
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      productIds: {
+        type: Sequelize.STRING,
       }
     });
   },
 
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('User');
+    return queryInterface.dropTable('Users');
   },
 };
