@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { makeStyles } from '@mui/styles'
 import LandingPage from '../pages/LandingPage'
+import ShopPage from '../pages/ShopPage'
 
 const useStyles = makeStyles({
   container: {
@@ -21,6 +22,7 @@ const Router = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage/>} />
+            <Route path="/shop" element={<ShopPage />} />
           </Routes>
         </BrowserRouter>
       </div>
