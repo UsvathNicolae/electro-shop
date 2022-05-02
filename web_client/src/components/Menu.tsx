@@ -62,6 +62,9 @@ const FullScreenMenu = (p: { open: boolean; closeDrawer: () => void }) => {
           <MenuButton variant="contained" color="primary" route="/shop" onClick={p.closeDrawer}>
              Shop now
           </MenuButton>
+          <MenuButton variant="contained" color="primary" route="/cart" onClick={p.closeDrawer}>
+             Go to shopping cart
+          </MenuButton>
           <div className={styles.grow}>
           </div>
           <div className={styles.social}>

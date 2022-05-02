@@ -37,6 +37,7 @@ const useStyles = makeStyles({
 
 const CustomNavbar = () => {
   const styles = useStyles();
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
 
@@ -47,6 +48,10 @@ const CustomNavbar = () => {
   const closeDrawer = () => {
     setOpen(false);
   };
+
+  const cartClick = () => {
+    navigate("/cart")
+  }
 
   return (
     <>
@@ -61,6 +66,7 @@ const CustomNavbar = () => {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              onClick={cartClick}
             >
                <ShoppingCartIcon />
             </IconButton>
