@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles'
 import LandingPage from '../pages/LandingPage'
 import ShopPage from '../pages/ShopPage'
 import CartPage from '../pages/CartPage'
+import ContactPage from "../pages/ContactPage";
+
 
 const useStyles = makeStyles({
   container: {
@@ -25,6 +27,7 @@ const Router = () => {
             <Route path="/" element={<LandingPage/>} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </BrowserRouter>
       </div>
