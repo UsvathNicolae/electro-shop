@@ -1,5 +1,6 @@
-import { Grid, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { Typography, Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles'
 import Navbar from "../components/NavBar";
 
 const useStyles = makeStyles({
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        marginTop: "10%"
     },
     container: {
         display: "flex",
@@ -41,14 +43,13 @@ const useStyles = makeStyles({
 const ContactPage = () => {
     const styles = useStyles();
 
-    // @ts-ignore
     return <div>
         <Navbar />
         <div className={styles.background}>
             <div className={ styles.container }>
-                <Grid container flexDirection='column'>
+                <Grid container flexDirection="column" className={styles.title}>
                     <Grid item>
-                        <Typography className={ styles.title}>
+                        <Typography variant="h2">
                             Address
                         </Typography>
                     </Grid>
@@ -74,43 +75,62 @@ const ContactPage = () => {
                     </Grid>
                 </Grid>
 
-                <Typography className = {styles.title} variant = "h3">
-
-                    <div>
-                        Program
+                <Grid container flexDirection="column"  className={styles.title}>
+                    <Grid item>
+                        <Typography variant="h2">
+                            Program
+                        </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             Monday-Friday
                         </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             09:00-18:00
                         </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             Saturday&Sunday
                         </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             Closed
                         </Typography>
 
-                    </div>
-                </Typography>
-                <Typography className = {styles.title} variant = "h3">
+                    </Grid>
+                </Grid>
 
-                    <div>
-                        Contact us
+                <Grid container flexDirection="column"  className={styles.title}>
+                    <Grid item>
+                        <Typography variant="h2">
+                            Contact us
+                        </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             Email
                         </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             nicu.usvath@gmail.com
                         </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             Phone
                         </Typography>
+                    </Grid>
+                    <Grid item>
                         <Typography className = { styles.text } variant = "h3">
                             0741561212
                         </Typography>
-                    </div>
-                </Typography>
+                    </Grid>
+                </Grid>
             </div>
         </div>
         <img className={ styles.imageWrapper } src = "contact.jpg"></img>
