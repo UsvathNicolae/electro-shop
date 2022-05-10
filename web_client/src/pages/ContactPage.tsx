@@ -27,10 +27,6 @@ const useStyles = makeStyles({
     title: {
         fontFamily: "Algerian",
         color: "yellow",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
         marginTop: "10%"
     },
     container: {
