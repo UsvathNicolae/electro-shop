@@ -1,14 +1,14 @@
-import { Container } from "@mui/material";
-import Toolbar from "@mui/material/Toolbar";
-import AppBar from "@mui/material/AppBar";
-import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FullScreenMenu from "./Menu";
-import { Typography } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { Container } from "@mui/material"
+import Toolbar from "@mui/material/Toolbar"
+import AppBar from "@mui/material/AppBar"
+import React, { useState } from "react"
+import { makeStyles } from "@mui/styles"
+import IconButton from "@mui/material/IconButton"
+import MenuIcon from "@mui/icons-material/Menu"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
+import FullScreenMenu from "./Menu"
+import { Typography } from "@material-ui/core"
+import { useNavigate } from "react-router-dom"
 
 const useStyles = makeStyles({
   appbar: {
@@ -22,32 +22,32 @@ const useStyles = makeStyles({
   },
   titleWrapper: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   title: {
-    fontFamily: "Cookie"
+    fontFamily: "Cookie",
   },
-  whiteText:{
-    color: "white"
+  whiteText: {
+    color: "white",
   },
   grow: {
     flexGrow: 1,
   },
-});
+})
 
 const CustomNavbar = () => {
-  const styles = useStyles();
-  const navigate = useNavigate();
+  const styles = useStyles()
+  const navigate = useNavigate()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const toggleDrawer = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const closeDrawer = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const cartClick = () => {
     navigate("/cart")
@@ -55,10 +55,10 @@ const CustomNavbar = () => {
 
   return (
     <>
-      <AppBar position="relative" style={{zIndex: 1}} className={styles.appbar}>
+      <AppBar position="sticky" style={{ zIndex: 1 }} className={styles.appbar}>
         <Container maxWidth="xl">
           <Toolbar>
-            <img src="logo.png" alt="logo" className={styles.logo}/>
+            <img src="logo.png" alt="logo" className={styles.logo} />
             <div className={styles.grow}></div>
             <IconButton
               size="large"
@@ -68,7 +68,7 @@ const CustomNavbar = () => {
               sx={{ mr: 2 }}
               onClick={cartClick}
             >
-               <ShoppingCartIcon />
+              <ShoppingCartIcon />
             </IconButton>
             <IconButton
               size="large"
@@ -85,7 +85,7 @@ const CustomNavbar = () => {
       </AppBar>
       <FullScreenMenu open={open} closeDrawer={closeDrawer} />
     </>
-  );
-};
+  )
+}
 
-export default CustomNavbar;
+export default CustomNavbar
