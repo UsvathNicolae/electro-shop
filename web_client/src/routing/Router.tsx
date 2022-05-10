@@ -5,6 +5,7 @@ import LandingPage from '../pages/LandingPage'
 import ShopPage from '../pages/ShopPage'
 import CartPage from '../pages/CartPage'
 import ContactPage from "../pages/ContactPage";
+import RegisterPage from "../pages/RegisterPage";
 
 
 const useStyles = makeStyles({
@@ -28,6 +29,7 @@ const Router = () => {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/register" element={<RegisterPage/>}/>
           </Routes>
         </BrowserRouter>
       </div>
