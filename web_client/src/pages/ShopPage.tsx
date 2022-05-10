@@ -4,7 +4,7 @@ import Navbar from "../components/NavBar";
 
 const useStyles = makeStyles({});
 
-const ContactPage = () => {
+const ShopPage = () => {
   const styles = useStyles();
 
   return <div>
@@ -12,4 +12,4 @@ const ContactPage = () => {
   </div>;
 };
 
-export default ContactPage;
+export default ShopPage;

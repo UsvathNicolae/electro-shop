@@ -54,7 +54,7 @@ const useStyles = makeStyles({
   },
 });
 
-function LandingPage() {
+const LandingPage = () => {
   const styles = useStyles();
 
   return (
