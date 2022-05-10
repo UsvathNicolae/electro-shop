@@ -7,6 +7,7 @@ const useStyles = makeStyles({
     background: {
         position: "relative",
         zIndex: -1,
+        top: 0,
         backgroundColor: "rgba(0,0,0,0.5)",
         height: "88vh",
         width: "100%",
@@ -20,14 +21,14 @@ const useStyles = makeStyles({
         height: "100%",
     },
     text: {
-        fontFamily: "Calibri",
+        fontFamily: "Buxton Sketch",
         color: "white",
 
     },
     title: {
-        fontFamily: "Algerian",
         color: "yellow",
-        marginTop: "10%"
+        marginTop: "5%",
+        fontFamily: "Buxton Sketch",
     },
     container: {
         display: "flex",
@@ -42,92 +43,102 @@ const ContactPage = () => {
     return <div>
         <Navbar />
         <div className={styles.background}>
-            <div className={ styles.container }>
-                <Grid container flexDirection="column" className={styles.title}>
-                    <Grid item>
-                        <Typography variant="h2">
-                            Address
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            City
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Timisoara
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Street
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Bv. Vasile Parvan 2
-                        </Typography>
-                    </Grid>
+            <Grid container flexDirection = "column">
+                <Grid item className = {styles.title} marginTop = "5%">
+                    <Typography variant = "h2" fontFamily = "Buxton Sketch" >
+                        Stay in touch
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <div className={ styles.container }>
+                        <Grid container flexDirection="column" className={styles.title}>
+                            <Grid item>
+                                <Typography variant="h2" fontFamily = "Buxton Sketch" >
+                                    Address
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    City
+                                </Typography>
+                            </Grid>
+                            <Grid item >
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Timisoara
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Street
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Bv. Vasile Parvan 2
+                                </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container flexDirection="column"  className={styles.title}>
+                            <Grid item>
+                                <Typography variant="h2" fontFamily = "Buxton Sketch">
+                                    Program
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Monday-Friday
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    10:00-18:00
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Saturday-Sunday
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Closed
+                                </Typography>
+
+                            </Grid>
+                        </Grid>
+
+                        <Grid container flexDirection="column"  className={styles.title}>
+                            <Grid item>
+                                <Typography variant="h2" fontFamily = "Buxton Sketch">
+                                    Contact us
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Email
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    nicu.usvath@gmail.com
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    Phone
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography className = { styles.text } fontFamily = "Buxton Sketch" variant = "h3">
+                                    0741561212
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    </div>
                 </Grid>
 
-                <Grid container flexDirection="column"  className={styles.title}>
-                    <Grid item>
-                        <Typography variant="h2">
-                            Program
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Monday-Friday
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            09:00-18:00
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Saturday&Sunday
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Closed
-                        </Typography>
-
-                    </Grid>
-                </Grid>
-
-                <Grid container flexDirection="column"  className={styles.title}>
-                    <Grid item>
-                        <Typography variant="h2">
-                            Contact us
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Email
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            nicu.usvath@gmail.com
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            Phone
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography className = { styles.text } variant = "h3">
-                            0741561212
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </div>
+            </Grid>
         </div>
         <img className={ styles.imageWrapper } src = "contact.jpg"></img>
     </div>;
