@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
     },
     title: {
-        color: "yellow",
+        color: "#acebd3",
         marginTop: "5%",
         fontFamily: "Buxton Sketch",
     },
