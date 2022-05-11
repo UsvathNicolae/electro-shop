@@ -36,13 +36,13 @@ const RegisterPage = () => {
 
     const [disable, setDisable] = useState<boolean>(false)
 
-    const [success,setSuccess] = useState("")
+    const [success,setSuccess] = useState<any>("")
+
+    const [successMessage, setSuccessMessage] = useState("")
 
     useEffect(() => {
-        if(registerData.password === registerData.confirmedPassword){
-            const bool = !registerData.email || !registerData.username || !registerData.password || !registerData.confirmedPassword
-            setDisable(bool)
-        }
+        const bool = !registerData.email || !registerData.username || !registerData.password || !registerData.confirmedPassword || !(registerData.password === registerData.confirmedPassword)
+        setDisable(bool)
     },[registerData])
 
 
@@ -52,9 +52,19 @@ const RegisterPage = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(registerData),
         }).then((data) => data.json()).then((data) => {
-            setSuccess("Registered successfully")
+             console.log(data)
+             if(data.message){
+                 setSuccess("error");
+                 setSuccessMessage(data.message)
+             }else{
+                 setSuccess("success")
+                 setSuccessMessage("Account created successfully")
+             }
              handleClick()
-        }).catch((error) => {console.error(error)})
+        }).catch((error) => {
+            setSuccessMessage(error.message);
+            //console.error(error)
+        })
         setRegisterData({
             email:"",
             username:"",
@@ -100,7 +110,6 @@ const RegisterPage = () => {
                                 type = "text"
                                 name = "email"
                                 required
-                                id = "standard-required"
                                 label = "Required"
                                 placeholder = "email@address.com"
                                 value = { registerData.email }
@@ -120,7 +129,6 @@ const RegisterPage = () => {
                                 type = "text"
                                 name = "username"
                                 required
-                                id="standard-required"
                                 label="Required"
                                 value={ registerData.username }
                                 variant="standard"
@@ -136,10 +144,9 @@ const RegisterPage = () => {
                         </TableCell>
                         <TableCell>
                             <TextField
-                                type = "text"
+                                type = "password"
                                 name = "password"
                                 required
-                                id="standard-required"
                                 label="Required"
                                 value={ registerData.password }
                                 variant="standard"
@@ -155,10 +162,9 @@ const RegisterPage = () => {
                         </TableCell>
                         <TableCell>
                             <TextField
-                                type = "text"
+                                type = "password"
                                 name = "confirmedPassword"
                                 required
-                                id="standard-required"
                                 label="Required"
                                 value={ registerData.confirmedPassword }
                                 variant="standard"
@@ -179,8 +185,8 @@ const RegisterPage = () => {
         </TableContainer>
 
         <Snackbar open={open} autoHideDuration={10000} onClose={handleClose} anchorOrigin={{vertical:"top",horizontal: "right" }}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                { success }
+            <Alert onClose={handleClose} severity = { success } sx={{ width: '100%' }}>
+                { successMessage }
             </Alert>
         </Snackbar>
     </div>;
