@@ -83,10 +83,10 @@ const RegisterPage = () => {
 
     return <div>
         <Navbar />
-        <Typography variant = "h3">
-            Sign Up
+        <Typography variant = "h3" marginTop = "10vh" color = "#acebd3">
+            Create an account
         </Typography>
-        <TableContainer style={{margin: "auto", width: "25%", marginTop:"15vh"}} sx={{boxShadow:3}}>
+        <TableContainer style={{margin: "auto", width: "25%", marginTop:"10vh"}} sx={{boxShadow:3}}>
             <Table >
                 <TableBody>
                     <TableRow>
@@ -100,11 +100,11 @@ const RegisterPage = () => {
                                 type = "text"
                                 name = "email"
                                 required
-                                id="standard-required"
-                                label="Required"
-                                placeholder={"example@asds.com"}
-                                value={ registerData.email }
-                                variant="standard"
+                                id = "standard-required"
+                                label = "Required"
+                                placeholder = "email@address.com"
+                                value = { registerData.email }
+                                variant = "standard"
                                 onChange = {(e:any) => handleOnChange(e)}
                             />
                         </TableCell>
@@ -166,12 +166,18 @@ const RegisterPage = () => {
                             />
                         </TableCell>
                     </TableRow>
+                    <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell align = "center">
+                            <Button color="primary" variant="contained" onClick={handleOnSubmit} disabled={ disable }>
+                                Sign Up
+                            </Button>
+                        </TableCell>
+                    </TableRow>
                 </TableBody>
             </Table>
         </TableContainer>
-        <Button color="primary" variant="contained" onClick={handleOnSubmit} disabled={ disable }>
-            Sign Up
-        </Button>
+
         <Snackbar open={open} autoHideDuration={10000} onClose={handleClose} anchorOrigin={{vertical:"top",horizontal: "right" }}>
             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                 { success }
