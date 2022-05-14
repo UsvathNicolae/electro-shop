@@ -2,10 +2,14 @@ import React from "react";
 import {Typography, Grid, Table, TableBody, TableCell, TableRow, TableContainer, Button, Snackbar, Alert} from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import Navbar from "../components/NavBar";
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import RegisterType from "../types/registerType";
+
+
+import { setOpen } from "../redux/reducers/snackbarReducer";
+import { useAppDispatch } from "../redux/hooks"
+import CustomSnackBar from "../components/SnackBar"
 
 const useStyles = makeStyles({
     fieldsContainer:{
@@ -54,9 +58,11 @@ const RegisterPage = () => {
         }).then((data) => data.json()).then((data) => {
              console.log(data)
              if(data.message){
+                 //dispatch(setOpen("error", data.message))
                  setSuccess("error");
                  setSuccessMessage(data.message)
              }else{
+                // dispatch(setOpen("success", "Account created successfully"))
                  setSuccess("success")
                  setSuccessMessage("Account created successfully")
              }
