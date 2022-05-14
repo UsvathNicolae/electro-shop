@@ -1,36 +1,19 @@
 import React from "react";
-import {Typography, Grid, Table, TableBody, TableCell, TableRow, TableContainer, Button, Snackbar, Alert} from '@mui/material';
-import { makeStyles } from '@mui/styles'
+import { Typography, Table, TableBody, TableCell, TableRow, TableContainer, Button } from '@mui/material';
 import Navbar from "../components/NavBar";
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import RegisterType from "../types/registerType";
-
-
 import { setOpen } from "../redux/reducers/snackbarReducer";
 import { useAppDispatch } from "../redux/hooks"
-import CustomSnackBar from "../components/SnackBar"
-
-const useStyles = makeStyles({
-    fieldsContainer:{
-        flexDirection: "row",
-        //justifyContent: "center"
-    },
-    container:{
-        flexDirection: "column",
-        justifyContent: "center"
-    }
-});
-
 
 
 const RegisterPage = () => {
 
-    const [open, setOpen] = React.useState(false);
+    const dispatch = useAppDispatch()
 
+    const [disable, setDisable] = useState<boolean>(false)
 
-
-    const styles = useStyles();
     const [registerData, setRegisterData] = useState <RegisterType>({
         email:"",
         username:"",
@@ -38,17 +21,10 @@ const RegisterPage = () => {
         confirmedPassword:"",
     })
 
-    const [disable, setDisable] = useState<boolean>(false)
-
-    const [success,setSuccess] = useState<any>("")
-
-    const [successMessage, setSuccessMessage] = useState("")
-
     useEffect(() => {
         const bool = !registerData.email || !registerData.username || !registerData.password || !registerData.confirmedPassword || !(registerData.password === registerData.confirmedPassword)
         setDisable(bool)
     },[registerData])
-
 
     const handleOnSubmit = async () =>{
          await fetch("http://localhost:8080/user/post", {
@@ -58,18 +34,18 @@ const RegisterPage = () => {
         }).then((data) => data.json()).then((data) => {
              console.log(data)
              if(data.message){
-                 //dispatch(setOpen("error", data.message))
-                 setSuccess("error");
-                 setSuccessMessage(data.message)
+                 dispatch(setOpen({
+                     success: false,
+                     message: "An account with this email already exists"
+                 }))
              }else{
-                // dispatch(setOpen("success", "Account created successfully"))
-                 setSuccess("success")
-                 setSuccessMessage("Account created successfully")
+                 dispatch(setOpen({
+                     success: true,
+                     message: "Account created successfully"
+                 }))
              }
-             handleClick()
         }).catch((error) => {
-            setSuccessMessage(error.message);
-            //console.error(error)
+            console.error(error)
         })
         setRegisterData({
             email:"",
@@ -85,21 +61,10 @@ const RegisterPage = () => {
             ...registerData,[e.target.name]:e.target.value
         })
     }
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setSuccess("");
-        setOpen(false);
-    };
 
     return <div>
         <Navbar />
-        <Typography variant = "h3" marginTop = "10vh" color = "#acebd3">
+        <Typography variant = "h3" marginTop = "10vh" color = "#04243c">
             Create an account
         </Typography>
         <TableContainer style={{margin: "auto", width: "25%", marginTop:"10vh"}} sx={{boxShadow:3}}>
@@ -189,12 +154,6 @@ const RegisterPage = () => {
                 </TableBody>
             </Table>
         </TableContainer>
-
-        <Snackbar open={open} autoHideDuration={10000} onClose={handleClose} anchorOrigin={{vertical:"top",horizontal: "right" }}>
-            <Alert onClose={handleClose} severity = { success } sx={{ width: '100%' }}>
-                { successMessage }
-            </Alert>
-        </Snackbar>
     </div>;
 };
 
