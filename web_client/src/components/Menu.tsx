@@ -88,6 +88,14 @@ const FullScreenMenu = (p: { open: boolean; closeDrawer: () => void }) => {
           >
             Contact us
           </MenuButton>
+          <MenuButton
+              variant="contained"
+              color="primary"
+              route="/login"
+              onClick={p.closeDrawer}
+          >
+            Sign In
+          </MenuButton>
           <div className={styles.grow}></div>
           <div className={styles.social}>
             <SocialIcon

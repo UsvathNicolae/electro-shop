@@ -6,13 +6,15 @@ import { useState, useEffect } from "react";
 import RegisterType from "../types/registerType";
 import { setOpen } from "../redux/reducers/snackbarReducer";
 import { useAppDispatch } from "../redux/hooks"
-
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 
     const dispatch = useAppDispatch()
 
-    const [disable, setDisable] = useState<boolean>(false)
+    const navigate = useNavigate()
+
+    const [disable, setDisable] = useState<boolean>(true)
 
     const [registerData, setRegisterData] = useState <RegisterType>({
         email:"",
@@ -39,6 +41,7 @@ const RegisterPage = () => {
                      message: "An account with this email already exists"
                  }))
              }else{
+                 navigate("/login")
                  dispatch(setOpen({
                      success: true,
                      message: "Account created successfully"
@@ -60,6 +63,10 @@ const RegisterPage = () => {
         setRegisterData({
             ...registerData,[e.target.name]:e.target.value
         })
+    }
+
+    const handleSignIn = () => {
+        navigate("/login")
     }
 
     return <div>
@@ -154,6 +161,12 @@ const RegisterPage = () => {
                 </TableBody>
             </Table>
         </TableContainer>
+        <Typography  color = "primary">
+            Already have an account?
+        </Typography>
+        <Button color = "primary" variant = "contained" onClick = { handleSignIn }>
+            Sign in
+        </Button>
     </div>;
 };
 

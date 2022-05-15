@@ -16,19 +16,23 @@ import Navbar from "../components/NavBar";
 import LoginType from "../types/loginType";
 import { useAppDispatch } from "../redux/hooks"
 import { setOpen } from "../redux/reducers/snackbarReducer"
+import { useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles({})
 
 const LoginPage = () => {
+
     const styles = useStyles()
+
+    const navigate = useNavigate()
 
     const [loginData, setLoginData] = useState <LoginType>({
         email:"",
         password:"",
     })
 
-    const [disable, setDisable] = useState<boolean>(false)
+    const [disable, setDisable] = useState<boolean>(true)
 
     const dispatch = useAppDispatch()
 
@@ -55,6 +59,7 @@ const LoginPage = () => {
                 localStorage.setItem('token', data.token)
             }
             if(data.message){
+                navigate("/")
                 dispatch(setOpen({
                     success: true,
                     message: "Authentication successfully"
@@ -76,8 +81,8 @@ const LoginPage = () => {
         })
     }
 
-    const submit = () => {
-
+    const handleSignUp = () => {
+        navigate("/register")
     }
 
     return (
@@ -139,6 +144,12 @@ const LoginPage = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Typography  color = "primary">
+                Don't have an account?
+            </Typography>
+            <Button color = "primary" variant = "contained" onClick = { handleSignUp }>
+                Sign up
+            </Button>
         </div>
     )
 }
