@@ -41,7 +41,6 @@ const ContactPage = () => {
 
   return (
     <div>
-      <Navbar />
       <div className={styles.background}>
         <Grid container flexDirection="column">
           <Grid item className={styles.title} marginTop="5%">

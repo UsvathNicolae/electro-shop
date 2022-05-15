@@ -39,11 +39,12 @@ const fetchAll = async (req, res) => {
 
 const  postProduct = async (req, res) => {
     const payload = req.body;
-
     try {
         const result = await postProductDB(payload);
         if(result){
-            res.status(200).json(result)
+            res.status(200).json({
+                message: 'New product successfully added'
+            })
         }
     } catch (err){
         res.status(500).json({

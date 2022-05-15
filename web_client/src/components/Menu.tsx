@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, {useEffect, useState, useRef} from "react"
 import { makeStyles } from "@mui/styles"
 import Drawer from "@mui/material/Drawer"
 import Divider from "@mui/material/Divider"
@@ -6,6 +6,9 @@ import IconButton from "@mui/material/IconButton"
 import CancelIcon from "@mui/icons-material/Cancel"
 import MenuButton from "./MenuButton"
 import { SocialIcon } from "react-social-icons"
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import {itemAdded} from "../redux/reducers/usernameReducer";
+import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles({
   menu: {
@@ -39,11 +42,28 @@ const useStyles = makeStyles({
 
 const FullScreenMenu = (p: { open: boolean; closeDrawer: () => void }) => {
   const styles = useStyles()
+  const user = useAppSelector((state) => state.username)
+  const dispatch = useAppDispatch()
+  const closeBtn = useRef<any>();
+  const userRole = useAppSelector((state) => state.role)
+
+  const handleLogout = () => {
+    p.closeDrawer
+    dispatch(itemAdded({
+      username: '',
+    }))
+    localStorage.clear()
+    if(closeBtn.current)
+      {
+        closeBtn.current.click()
+      }
+  }
 
   return (
     <Drawer anchor="right" open={p.open}>
       <div className={styles.buttonContainer}>
         <IconButton
+          ref={closeBtn}
           size="large"
           edge="start"
           color="inherit"
@@ -88,14 +108,39 @@ const FullScreenMenu = (p: { open: boolean; closeDrawer: () => void }) => {
           >
             Contact us
           </MenuButton>
-          <MenuButton
-              variant="contained"
-              color="primary"
-              route="/login"
-              onClick={p.closeDrawer}
-          >
-            Sign In
-          </MenuButton>
+          {
+              user.username === '' &&
+              <MenuButton
+                  variant="contained"
+                  color="primary"
+                  route="/login"
+                  onClick={p.closeDrawer}
+              >
+                Sign In
+              </MenuButton>
+          }
+          {
+              user.username !== '' &&
+              <MenuButton
+                  variant="contained"
+                  color="primary"
+                  route="/login"
+                  onClick={handleLogout}
+              >
+                Logout
+              </MenuButton>
+          }
+          {
+              userRole.role === 'ADMIN' &&
+              <MenuButton
+                  variant="contained"
+                  color="primary"
+                  route="/addProduct"
+                  onClick={p.closeDrawer}
+              >
+                Add product
+              </MenuButton>
+          }
           <div className={styles.grow}></div>
           <div className={styles.social}>
             <SocialIcon

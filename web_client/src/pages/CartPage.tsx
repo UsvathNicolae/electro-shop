@@ -9,7 +9,6 @@ const ContactPage = () => {
 
   return (
     <div>
-      <Navbar />
       <p>Personal cart</p>
     </div>
   )

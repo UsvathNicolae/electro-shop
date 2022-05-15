@@ -5,15 +5,13 @@ import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import RegisterType from "../types/registerType";
 import { setOpen } from "../redux/reducers/snackbarReducer";
-import { useAppDispatch } from "../redux/hooks"
+import {useAppDispatch, useAppSelector} from "../redux/hooks"
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 
     const dispatch = useAppDispatch()
-
     const navigate = useNavigate()
-
     const [disable, setDisable] = useState<boolean>(true)
 
     const [registerData, setRegisterData] = useState <RegisterType>({
@@ -70,7 +68,6 @@ const RegisterPage = () => {
     }
 
     return <div>
-        <Navbar />
         <Typography variant = "h3" marginTop = "10vh" color = "#04243c">
             Create an account
         </Typography>

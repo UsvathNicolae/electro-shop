@@ -23,7 +23,7 @@ const snackbarSlice = createSlice({
   initialState,
   reducers: {
     setOpen(state, action) {
-      ;(state.message = action.payload.message),
+        (state.message = action.payload.message),
         (state.success = action.payload.success),
         (state.isOpen = true)
     },

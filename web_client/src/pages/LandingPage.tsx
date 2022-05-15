@@ -59,7 +59,6 @@ const LandingPage = () => {
 
   return (
     <div>
-      <Navbar />
       <div className={styles.overlay}>
         <div className={styles.overlayContent}>
           <Typography className={styles.title} variant="h1" color="secondary">

@@ -7,24 +7,22 @@ import {
     TableRow,
     TableContainer,
     Button,
-    Snackbar,
-    Alert,
     TextField
 } from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import Navbar from "../components/NavBar";
 import LoginType from "../types/loginType";
-import { useAppDispatch } from "../redux/hooks"
+import {useAppDispatch, useAppSelector} from "../redux/hooks"
 import { setOpen } from "../redux/reducers/snackbarReducer"
 import { useNavigate } from "react-router-dom";
+import {itemAdded} from "../redux/reducers/usernameReducer";
+import { addRole } from "../redux/reducers/roleReducer";
 
 
 const useStyles = makeStyles({})
 
 const LoginPage = () => {
-
     const styles = useStyles()
-
     const navigate = useNavigate()
 
     const [loginData, setLoginData] = useState <LoginType>({
@@ -57,6 +55,12 @@ const LoginPage = () => {
         }).then((data) => data.json()).then((data) => {
             if(data.token){
                 localStorage.setItem('token', data.token)
+                dispatch(itemAdded({
+                    username: data.user,
+                }))
+                dispatch(addRole({
+                    role: data.role,
+                }))
             }
             if(data.message){
                 navigate("/")
@@ -87,10 +91,10 @@ const LoginPage = () => {
 
     return (
         <div>
-            <Navbar />
             <Typography variant = "h3" marginTop = "10vh" color = "#acebd3">
                 Login
             </Typography>
+            <form>
             <TableContainer style = {{ marginTop: "10vh", margin: "auto", width: "20%" }}>
                 <Table>
                     <TableBody>
@@ -144,6 +148,7 @@ const LoginPage = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            </form>
             <Typography  color = "primary">
                 Don't have an account?
             </Typography>

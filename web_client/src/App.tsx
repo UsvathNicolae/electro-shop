@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles"
 import { store } from "./redux/store"
 import { Provider } from "react-redux"
 import CustomSnackBar from "./components/SnackBar"
+import {BrowserRouter, Routes} from "react-router-dom";
 
 const theme = createTheme({
   palette: {

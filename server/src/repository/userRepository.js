@@ -10,6 +10,10 @@ const fetchUserByEmail = (email) => {
     return USER.findOne({where: { email: email }});
 }
 
+const fetchUserById = (id) => {
+    return USER.findOne({where: { id }});
+}
+
 const postUserDB = (payload) => {
     return USER.create(payload);
 }
@@ -22,5 +26,5 @@ const deleteUserDB = (id) => {
     return USER.destroy({where: { id: id }});
 }
 
-module.exports = { fetchAllUsers, postUserDB, putUserDB, deleteUserDB, fetchUserByEmail }
+module.exports = { fetchAllUsers, postUserDB, putUserDB, deleteUserDB, fetchUserByEmail, fetchUserById }
 

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { fetchAllUsers, postUserDB, putUserDB, deleteUserDB, fetchUserByEmail} = require('../repository/userRepository');
+const { fetchAllUsers, postUserDB, putUserDB, deleteUserDB, fetchUserByEmail, fetchUserById} = require('../repository/userRepository');
 
 const fetchAll = async (req, res) => {
     try {
@@ -20,7 +20,6 @@ const fetchAll = async (req, res) => {
 //login, user logins with email and password
 const loginUser = async (req, res) => {
     const payload = req.body;
-    console.log('here')
     try {
         const user = await fetchUserByEmail(payload?.email);
         if(user){
@@ -49,7 +48,9 @@ const loginUser = async (req, res) => {
                     );
                     return res.status(200).json({
                         message: 'Auth successful',
-                        token: token
+                        token: token,
+                        user: user?.dataValues?.username,
+                        role: user?.dataValues?.role
                     })
                 }
                 //incorrect password
@@ -168,4 +169,55 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { fetchAll, postUser, updateUser, deleteUser, loginUser }
+const addToCart = async (req, res) => {
+    const { userId } = req.userData
+    const { productId } =  req.body
+
+    try {
+        let user = await fetchUserById(userId)
+        user = user.dataValues
+        let updatedData;
+        if(!user.productIds){
+            updatedData = productId
+        } else {
+            updatedData =  `${user.productIds},${productId}`
+        }
+        await putUserDB(userId, { productIds: updatedData })
+
+        res.status(200).json({
+            message: 'Item successfully added to cart'
+        })
+    } catch (error){
+        res.status(500).json({
+            error:{
+                message: error.message
+            }
+        })
+    }
+
+}
+
+const getNoProducts = async (req, res) => {
+    const { userId } = req.userData
+    try {
+        let user = await fetchUserById(userId)
+        user = user.dataValues
+        let cartLength = 0;
+        if(user.productIds !== null || user.productIds !== ''){
+            let ids = user.productIds.replace(/,/g,'')
+            cartLength = ids.length
+        }
+        res.status(200).json({
+            cartLength
+        })
+    }catch (error){
+        res.status(500).json({
+            error:{
+                message: error.message
+            }
+        })
+    }
+
+}
+
+module.exports = { fetchAll, postUser, updateUser, deleteUser, loginUser, addToCart, getNoProducts }

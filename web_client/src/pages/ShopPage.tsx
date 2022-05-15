@@ -4,6 +4,7 @@ import CustomCard from "../components/Card"
 import Navbar from "../components/NavBar"
 import { getProducts } from "../service/shopPageService";
 import Product from "../types/Product";
+import {setOpen} from "../redux/reducers/snackbarReducer";
 
 const useStyles = makeStyles({
   container: {
@@ -37,14 +38,13 @@ const ShopPage = () => {
       if(data){
         setProducts(data)
       }
-    }catch (error){
+    }catch (error: any){
       console.error(error)
     }
   }
 
   return (
     <div className={styles.page}>
-      <Navbar />
       <div className={styles.container}>
         {
           products.map((product) =>
@@ -55,6 +55,7 @@ const ShopPage = () => {
                     img={product.img}
                     price={product.price}
                     title={product.title}
+                    quantity={product.quantity}
                 />
               </React.Fragment>
           )

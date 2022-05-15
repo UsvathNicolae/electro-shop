@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
                 values: ['USER', 'ADMIN'],
                 defaultValue: 'USER',
             },
+            productIds: {
+                type: DataTypes.STRING,
+            },
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,

@@ -8,11 +8,16 @@ const checkAuth = require("../middleware/check-auth");
 
 router.get('/get', checkAuth, userController.fetchAll);
 
+router.get('/getNumberOfProducts', checkAuth, userController.getNoProducts);
+
 router.post('/post', userController.postUser);
 
 router.post('/login', userController.loginUser);
 
+router.put('/add', checkAuth, userController.addToCart);
+
 router.put('/put/:id', checkAuth, userController.updateUser);
+
 
 router.delete('/delete/:id', checkAuth, userController.deleteUser);
 
