@@ -27,7 +27,11 @@ module.exports = (sequelize, DataTypes) => {
             quantity: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-            }
+            },
+            img: {
+                type: DataTypes.BLOB('long'),
+                allowNull: false,
+            },
         }
     );
 };

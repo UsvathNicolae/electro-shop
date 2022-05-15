@@ -6,6 +6,10 @@ const fetchAllProducts = () => {
     return PRODUCT.findAll({ attributes: { exclude: ['createdAt','updatedAt'] } });
 }
 
+const fetchById = (id) => {
+    return PRODUCT.findOne({ where: { id: id } })
+}
+
 const postProductDB = (payload) => {
     return PRODUCT.create(payload);
 }
@@ -18,5 +22,5 @@ const deleteProductDB = (id) => {
     return PRODUCT.destroy({where: { id: id }});
 }
 
-module.exports = { fetchAllProducts, postProductDB, putProductDB, deleteProductDB }
+module.exports = { fetchById, fetchAllProducts, postProductDB, putProductDB, deleteProductDB }
 

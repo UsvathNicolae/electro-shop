@@ -20,7 +20,7 @@ const fetchAll = async (req, res) => {
 //login, user logins with email and password
 const loginUser = async (req, res) => {
     const payload = req.body;
-
+    console.log('here')
     try {
         const user = await fetchUserByEmail(payload?.email);
         if(user){

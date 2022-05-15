@@ -1,10 +1,32 @@
-const { fetchAllProducts, postProductDB, putProductDB, deleteProductDB } = require('../repository/productRepository');
+const { fetchById, fetchAllProducts, postProductDB, putProductDB, deleteProductDB } = require('../repository/productRepository');
+const {convertBufferToString} = require("../utils/utils");
+
+const fetchProductById = async (req, res) => {
+    const { id } = req.params;
+    try{
+        const product = await fetchById(id);
+        if(product){
+            res.status(200).json({ ...product.dataValues, img: convertBufferToString(product.dataValues.img)})
+        }
+    }catch (e){
+        res.status(500).json({
+            error: {
+                message: e.message
+            }
+        })
+    }
+}
 
 const fetchAll = async (req, res) => {
     try {
         const result = await fetchAllProducts();
-        if(result){
-            res.status(200).json(result)
+
+        const response = result.map((prod) => ({
+            ...prod?.dataValues,
+            img: convertBufferToString(prod?.dataValues.img),
+        }));
+        if(response){
+            res.status(200).json(response)
         }
     } catch (err){
         res.status(500).json({
@@ -81,4 +103,4 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-module.exports = { fetchAll, postProduct, updateProduct, deleteProduct }
+module.exports = { fetchProductById, fetchAll, postProduct, updateProduct, deleteProduct }
