@@ -54,12 +54,16 @@ const loginUser = async (req, res) => {
                 }
                 //incorrect password
                 return res.status(401).json({
-                    message: 'Auth failed'
+                    error: {
+                        message: 'Auth failed'
+                    }
                 })
             });
         } else {
             return res.status(401).json({
-                message: 'Auth failed'
+                error: {
+                    message: 'Auth failed'
+                }
             })
         }
 

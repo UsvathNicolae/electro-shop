@@ -6,6 +6,7 @@ import ShopPage from "../pages/ShopPage"
 import CartPage from "../pages/CartPage"
 import ContactPage from "../pages/ContactPage"
 import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
 
 const useStyles = makeStyles({
   container: {
@@ -29,6 +30,7 @@ const Router = () => {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />}/>
           </Routes>
         </BrowserRouter>
       </div>
