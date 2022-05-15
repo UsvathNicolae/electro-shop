@@ -8,11 +8,17 @@ import { setOpen } from "../redux/reducers/snackbarReducer";
 import {useAppDispatch, useAppSelector} from "../redux/hooks"
 import { useNavigate } from "react-router-dom";
 
+enum PasswordValid {
+    Success = "success",
+    Error = "error"
+}
+
 const RegisterPage = () => {
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [disable, setDisable] = useState<boolean>(true)
+    const [passwordValid, setPasswordValid] = useState<PasswordValid>()
 
     const [registerData, setRegisterData] = useState <RegisterType>({
         email:"",
@@ -25,6 +31,15 @@ const RegisterPage = () => {
         const bool = !registerData.email || !registerData.username || !registerData.password || !registerData.confirmedPassword || !(registerData.password === registerData.confirmedPassword)
         setDisable(bool)
     },[registerData])
+
+    useEffect(() => {
+        const bool = !registerData.password || !registerData.confirmedPassword || !(registerData.password === registerData.confirmedPassword)
+        if(!bool){
+            setPasswordValid(PasswordValid.Success)
+        }else{
+            setPasswordValid(PasswordValid.Error)
+        }
+    })
 
     const handleOnSubmit = async () =>{
          await fetch("http://localhost:8080/user/post", {
@@ -125,6 +140,7 @@ const RegisterPage = () => {
                                 label="Required"
                                 value={ registerData.password }
                                 variant="standard"
+                                color={passwordValid}
                                 onChange = {(e:any) => handleOnChange(e)}
                             />
                         </TableCell>
@@ -143,6 +159,7 @@ const RegisterPage = () => {
                                 label="Required"
                                 value={ registerData.confirmedPassword }
                                 variant="standard"
+                                color={passwordValid}
                                 onChange = {(e:any) => handleOnChange(e)}
                             />
                         </TableCell>
