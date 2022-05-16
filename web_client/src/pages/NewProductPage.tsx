@@ -88,7 +88,7 @@ const NewProductPage = () => {
     return(
         <div>
             <Typography variant = "h3" marginTop = "5vh" color = "#04243c">
-                Create an account
+                Add a new product
             </Typography>
             <TableContainer style={{margin: "auto", width: "50%", marginTop:"5vh"}} sx={{boxShadow:3}}>
                 <Table >

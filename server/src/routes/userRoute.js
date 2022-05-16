@@ -10,6 +10,10 @@ router.get('/get', checkAuth, userController.fetchAll);
 
 router.get('/getNumberOfProducts', checkAuth, userController.getNoProducts);
 
+router.get('/getCartProducts', checkAuth, userController.getCartProducts)
+
+router.delete('/deleteCartItem/:productId', checkAuth, userController.deleteFromCart)
+
 router.post('/post', userController.postUser);
 
 router.post('/login', userController.loginUser);

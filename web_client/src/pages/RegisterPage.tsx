@@ -53,6 +53,7 @@ const RegisterPage = () => {
                      success: false,
                      message: "An account with this email already exists"
                  }))
+                 navigate("/")
              }else{
                  navigate("/login")
                  dispatch(setOpen({
