@@ -4,15 +4,17 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Login } from './src/pages/login';
+import { OrderList } from './src/pages/order-list';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
-    <SafeAreaView style = {{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
         {/* @ts-ignore */}
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="OrderList" component={OrderList} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
