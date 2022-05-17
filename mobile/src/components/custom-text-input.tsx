@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { StyleProp, TextInput, View, ViewStyle, Text } from "react-native";
+import React, { useRef } from "react";
+import { StyleProp, TextInput, View, ViewStyle } from "react-native";
 
 const textInputStyles: StyleProp<ViewStyle> = {
     margin: 12,
@@ -18,7 +18,6 @@ type CustomInputProps = {
     value: string | undefined,
     placeholderText: string,
     onChangeText: (val: string) => void,
-
 }
 
 export function CustomTextInput(p: CustomInputProps) {
@@ -33,7 +32,6 @@ export function CustomTextInput(p: CustomInputProps) {
             style={{
                 marginLeft: 10,
                 width: "90%",
-
             }}
             value={p.value}
         />

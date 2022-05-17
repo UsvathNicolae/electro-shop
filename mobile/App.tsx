@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Login } from './src/pages/login';
 import { OrderList } from './src/pages/order-list';
+import { SingleOrder } from './src/pages/single-order';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="OrderList" component={OrderList} />
+          <Stack.Screen name="SingleOrder" component={SingleOrder} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
