@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard, AsyncStorage } from "react-native";
 import { CustomTextInput } from "../components/custom-text-input";
 import { px, useAppNavigation } from "../hooks/utils";
 
 type RegInfo<T> = {
-    username: T,
+    email: T,
     password: T
 }
 
@@ -14,7 +14,7 @@ export function Login() {
     const [error, setError] = useState(false);
 
     const onChangeUsername = (val: string) => {
-        setRegInfo({ ...regInfo!, username: val });
+        setRegInfo({ ...regInfo!, email: val });
     }
 
     const onChangePassword = (val: string) => {
@@ -22,12 +22,24 @@ export function Login() {
     }
 
     const login = async (regInfo: RegInfo<string>) => {
-        try {
-            nav.navigate("OrderList");
-        } catch (e) {
-            setError(true);
-            console.log(e);
-        }
+        await fetch("http://localhost:8080/user/login", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(regInfo),
+        }).then((data) => data.json()).then((result) => {
+            console.log(result)
+            if(result.token){
+                AsyncStorage.setItem('token', result.token);
+            }
+            if(result.message){
+                nav.navigate("OrderList");
+            }else{
+                setError(true);
+            }
+
+        }).catch((error) => {
+            console.log("eroare", error)
+        })
     }
 
     return <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
@@ -36,7 +48,7 @@ export function Login() {
             <View style={{ flex: 1, flexDirection: "column" }}>
                 <View style={{ marginTop: 20 }}></View>
                 <CustomTextInput
-                    value={regInfo?.username}
+                    value={regInfo?.email}
                     onChangeText={onChangeUsername}
                     placeholderText="Enter your username"
                     key={0}
