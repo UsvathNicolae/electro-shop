@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
     Typography,
     Table,
@@ -17,6 +17,7 @@ import { setOpen } from "../redux/reducers/snackbarReducer"
 import { useNavigate } from "react-router-dom";
 import {itemAdded} from "../redux/reducers/usernameReducer";
 import { addRole } from "../redux/reducers/roleReducer";
+import {CartLength} from "../routing/Router";
 
 
 const useStyles = makeStyles({})
@@ -24,6 +25,7 @@ const useStyles = makeStyles({})
 const LoginPage = () => {
     const styles = useStyles()
     const navigate = useNavigate()
+    const myContext = useContext(CartLength);
 
     const [loginData, setLoginData] = useState <LoginType>({
         email:"",
@@ -64,6 +66,7 @@ const LoginPage = () => {
             }
             if(data.message){
                 navigate("/")
+                myContext.setLength(!myContext.length)
                 dispatch(setOpen({
                     success: true,
                     message: "Authentication successfully"

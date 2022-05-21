@@ -59,7 +59,12 @@ const CustomNavbar = () => {
   },[location] )
 
   useEffect(() => {
-    getCartNoOfProducts()
+    if(localStorage.getItem('token')){
+      getCartNoOfProducts()
+    } else {
+      setCartLength(0);
+    }
+
   },[myContext.length])
 
   const getCartNoOfProducts = async () => {
