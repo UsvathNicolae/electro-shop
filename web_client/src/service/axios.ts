@@ -26,3 +26,8 @@ export const post = async<T>(url: string, data: any): Promise<T> => {
     const response = await axiosInstance.post(url,data)
     return response.data
 }
+
+export const delet = async<T>(url: string): Promise<T> => {
+    const response = await axiosInstance.delete(url)
+    return response.data
+}

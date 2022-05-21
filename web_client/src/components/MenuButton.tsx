@@ -16,7 +16,7 @@ const CustomMenuButton = (p: {
   color?: PropTypes.Color
   children: ReactNode
   onClick?: () => void
-  route: string
+  route?: string
 }) => {
   const styles = useStyles()
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ const CustomMenuButton = (p: {
     if (p && p.onClick) p.onClick()
     if (typeof p.route === "string" && p.route === "/") {
       navigate(p.route, { replace: true })
-    } else {
+    } else if(p.route){
       navigate(p.route)
     }
   }
