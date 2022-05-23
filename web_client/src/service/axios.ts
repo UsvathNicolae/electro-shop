@@ -22,7 +22,7 @@ export const put = async<T>(url: string, data: any): Promise<T> => {
     return response.data
 }
 
-export const post = async<T>(url: string, data: any): Promise<T> => {
+export const post = async<T>(url: string, data?: any): Promise<T> => {
     const response = await axiosInstance.post(url,data)
     return response.data
 }
