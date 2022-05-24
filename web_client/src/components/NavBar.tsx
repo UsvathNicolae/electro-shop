@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import {get} from "../service/axios";
 import {itemAdded} from "../redux/reducers/usernameReducer";
 import {CartLength} from "../routing/Router";
+import decode from 'jwt-decode';
 
 const useStyles = makeStyles({
   appbar: {
@@ -66,6 +67,26 @@ const CustomNavbar = () => {
     }
 
   },[myContext.length])
+
+  useEffect(() => {
+    checkExpiredToken('token');
+  }, [location]);
+
+  const checkExpiredToken = (token: string) => {
+    if (localStorage.getItem(token)) {
+      const tokenToCheck = localStorage.getItem(token);
+      if (tokenToCheck) {
+        const decodedToken: any = decode(tokenToCheck);
+        if (decodedToken.exp * 1000 < new Date().getTime()) {
+            myContext.setLength(!myContext.length)
+            dispatch(itemAdded({
+              username: '',
+            }))
+            localStorage.clear()
+        }
+      }
+    }
+  };
 
   const getCartNoOfProducts = async () => {
     if (localStorage.getItem('token')){
