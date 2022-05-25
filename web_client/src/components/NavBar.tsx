@@ -47,8 +47,8 @@ const CustomNavbar = () => {
   const styles = useStyles()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const user = useAppSelector((state) => state.username)
   const [open, setOpen] = useState(false)
+  const [user, setUser] = useState('')
   const [cartLength, setCartLength] = useState<number>(0)
   const location = useLocation();
   const myContext = useContext(CartLength);
@@ -64,6 +64,12 @@ const CustomNavbar = () => {
       getCartNoOfProducts()
     } else {
       setCartLength(0);
+    }
+
+    if(localStorage.getItem('user')){
+      setUser(localStorage.getItem('user') as string)
+    } else {
+      setUser('')
     }
 
   },[myContext.length])
@@ -119,12 +125,11 @@ const CustomNavbar = () => {
           <Toolbar>
             <img src="logo.png" alt="logo" className={styles.logo} />
             <div className={styles.grow}></div>
-            {
-              user.username &&
+
                 <Typography variant="h5" sx={{px: 3, py:2}}>
-                  {user.username}
+                  {user}
                 </Typography>
-            }
+
             {
               cartLength > 0 ?
                   <Badge
