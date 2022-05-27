@@ -52,12 +52,10 @@ const LoginPage = () => {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(loginData),
-        }).then((data) => data.json()).then((data) => {
+        }).then((data) => data.json()).then( (data) => {
             if(data.token){
                 localStorage.setItem('token', data.token)
-                dispatch(itemAdded({
-                    username: data.user,
-                }))
+                localStorage.setItem('user', data.user)
                 dispatch(addRole({
                     role: data.role,
                 }))
