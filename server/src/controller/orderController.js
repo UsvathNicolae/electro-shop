@@ -47,6 +47,9 @@ const postOrder = async (req, res) => {
     for(product of cartProducts){
       totalPrice += product.price
     }
+
+    totalPrice += (totalPrice>1000)? 0:25 //shipment
+
     const response = await fetchUserById(userId)
 
     const username = response.dataValues.username

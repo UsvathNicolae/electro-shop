@@ -261,9 +261,6 @@ const getCartProducts = async (req, res) => {
 
     try{
         let user = await fetchUserById(userId)
-        console.log("@@@@@@@@@@@@@")
-        console.log(user.productIds)
-        console.log("@@@@@@@@@@@@@")
         user = user.dataValues
         let cartItems
         if(user.productIds !== null || user.productIds !== ''){
@@ -274,7 +271,8 @@ const getCartProducts = async (req, res) => {
                         productId: productId,
                         productName: product.productName,
                         price: product.price,
-                        img: convertBufferToString(product.img)
+                        img: convertBufferToString(product.img),
+                        description: product.description
                     }
                 }))
             }) )

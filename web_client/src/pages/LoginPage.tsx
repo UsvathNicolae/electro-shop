@@ -19,11 +19,9 @@ import {itemAdded} from "../redux/reducers/usernameReducer";
 import { addRole } from "../redux/reducers/roleReducer";
 import {CartLength} from "../routing/Router";
 
-
 const useStyles = makeStyles({})
 
 const LoginPage = () => {
-    const styles = useStyles()
     const navigate = useNavigate()
     const myContext = useContext(CartLength);
 
@@ -94,11 +92,11 @@ const LoginPage = () => {
 
     return (
         <div>
-            <Typography variant = "h3" marginTop = "10vh" color = "#acebd3">
+            <Typography variant = "h3" marginTop = "10vh" color = "#04243c">
                 Login
             </Typography>
             <form>
-            <TableContainer style = {{ marginTop: "10vh", margin: "auto", width: "20%" }}>
+            <TableContainer style = {{ margin: "auto", width: "20%", marginTop: "10vh" }} sx={{boxShadow:3}}>
                 <Table>
                     <TableBody>
                         <TableRow>
@@ -118,7 +116,6 @@ const LoginPage = () => {
                                     onChange = {(e:any) => handleOnChange(e)}
                                     value = { loginData.email }
                                 />
-
                             </TableCell>
                         </TableRow>
                         <TableRow>
