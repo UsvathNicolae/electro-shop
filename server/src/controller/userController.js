@@ -271,7 +271,8 @@ const getCartProducts = async (req, res) => {
                         productId: productId,
                         productName: product.productName,
                         price: product.price,
-                        img: convertBufferToString(product.img)
+                        img: convertBufferToString(product.img),
+                        description: product.description
                     }
                 }))
             }) )

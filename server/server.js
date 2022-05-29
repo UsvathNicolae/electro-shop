@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const sequelize = require('./src/configs/sequelize/connection');
 const userRoute = require('./src/routes/userRoute');
 const productRoute = require('./src/routes/productRoute');
+const orderRoute = require('./src/routes/orderRoute');
 
 const app = express();
 dotenv.config();
@@ -36,6 +37,7 @@ sequelize
 
 app.use('/user', userRoute);
 app.use('/product', productRoute);
+app.use('/order', orderRoute);
 
 app.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`);

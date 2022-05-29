@@ -29,29 +29,44 @@ export const CartLength = createContext<{length?: boolean | null, setLength(valu
 
 const Router = () => {
   const classes = useStyles()
+  const token = localStorage.getItem('token')
   const [length, setLength] = useState<boolean | null>(false);
 
-  return (
-    <div className={classes.container}>
-      <div className={classes.fullHeight}>
-          <CartLength.Provider value={{length, setLength}} >
-            <BrowserRouter>
-              <Navbar />
-                  <Routes>
-                        <Route path="/" element={<LandingPage />} />
-                        <Route path="/shop" element={<ShopPage />} />
-                        <Route path="/cart" element={<CartPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/login" element={<LoginPage />}/>
-                        <Route path="/product/:id" element={<ProductPage />} />
-                        <Route path="/addProduct" element={<NewProductPage />} />
-                  </Routes>
-            </BrowserRouter>
-          </CartLength.Provider>
-      </div>
-    </div>
-  )
+    return (
+        <div className={classes.container}>
+            <div className={classes.fullHeight}>
+                    {
+                        <CartLength.Provider value={{length, setLength}} >
+                            <BrowserRouter>
+                                <Navbar />
+                                {
+                                    !token?
+                                        <Routes>
+                                            <Route path = "*" element ={<Navigate to="/login"/> }/>
+                                            <Route path="/" element={<LandingPage />} />
+                                            <Route path = "/login" element ={<LoginPage/> }/>
+                                            <Route path = "/register" element ={<RegisterPage/> }/>
+                                        </Routes>
+                                        :
+                                        <Routes>
+                                            <Route path="/" element={<LandingPage />} />
+                                            <Route path="/shop" element={<ShopPage />} />
+                                            <Route path="/cart" element={<CartPage />} />
+                                            <Route path="/contact" element={<ContactPage />} />
+                                            <Route path="/register" element={<RegisterPage />} />
+                                            <Route path="/login" element={<LoginPage />}/>
+                                            <Route path="/product/:id" element={<ProductPage />} />
+                                            <Route path="/addProduct" element={<NewProductPage />} />
+                                        </Routes>
+                                }
+
+
+                            </BrowserRouter>
+                        </CartLength.Provider>
+                    }
+            </div>
+        </div>
+    )
 }
 
 export default Router

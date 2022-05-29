@@ -17,6 +17,7 @@ const CustomMenuButton = (p: {
   children: ReactNode
   onClick?: () => void
   route?: string
+  disabled?: boolean
 }) => {
   const styles = useStyles()
   const navigate = useNavigate()
@@ -37,6 +38,7 @@ const CustomMenuButton = (p: {
       color={p.color}
       onClick={onButtonPressed}
       className={styles.wrapper}
+      disabled={p.disabled}
     >
       {p.children}
     </Button>

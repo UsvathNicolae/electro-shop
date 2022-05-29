@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import {get} from "../service/axios";
 import {itemAdded} from "../redux/reducers/usernameReducer";
 import {CartLength} from "../routing/Router";
+import decode from 'jwt-decode';
 
 const useStyles = makeStyles({
   appbar: {
@@ -46,8 +47,8 @@ const CustomNavbar = () => {
   const styles = useStyles()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const user = useAppSelector((state) => state.username)
   const [open, setOpen] = useState(false)
+  const [user, setUser] = useState('')
   const [cartLength, setCartLength] = useState<number>(0)
   const location = useLocation();
   const myContext = useContext(CartLength);
@@ -59,8 +60,39 @@ const CustomNavbar = () => {
   },[location] )
 
   useEffect(() => {
-    getCartNoOfProducts()
+    if(localStorage.getItem('token')){
+      getCartNoOfProducts()
+    } else {
+      setCartLength(0);
+    }
+
+    if(localStorage.getItem('user')){
+      setUser(localStorage.getItem('user') as string)
+    } else {
+      setUser('')
+    }
+
   },[myContext.length])
+
+  useEffect(() => {
+    checkExpiredToken('token');
+  }, [location]);
+
+  const checkExpiredToken = (token: string) => {
+    if (localStorage.getItem(token)) {
+      const tokenToCheck = localStorage.getItem(token);
+      if (tokenToCheck) {
+        const decodedToken: any = decode(tokenToCheck);
+        if (decodedToken.exp * 1000 < new Date().getTime()) {
+            myContext.setLength(!myContext.length)
+            dispatch(itemAdded({
+              username: '',
+            }))
+            localStorage.clear()
+        }
+      }
+    }
+  };
 
   const getCartNoOfProducts = async () => {
     if (localStorage.getItem('token')){
@@ -93,12 +125,11 @@ const CustomNavbar = () => {
           <Toolbar>
             <img src="logo.png" alt="logo" className={styles.logo} />
             <div className={styles.grow}></div>
-            {
-              user.username &&
+
                 <Typography variant="h5" sx={{px: 3, py:2}}>
-                  {user.username}
+                  {user}
                 </Typography>
-            }
+
             {
               cartLength > 0 ?
                   <Badge

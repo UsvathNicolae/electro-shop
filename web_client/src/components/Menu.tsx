@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react"
+import React, {useEffect, useState, useRef, useContext} from "react"
 import { makeStyles } from "@mui/styles"
 import Drawer from "@mui/material/Drawer"
 import Divider from "@mui/material/Divider"
@@ -9,6 +9,7 @@ import { SocialIcon } from "react-social-icons"
 import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {itemAdded} from "../redux/reducers/usernameReducer";
 import {useNavigate} from "react-router-dom";
+import {CartLength} from "../routing/Router";
 
 const useStyles = makeStyles({
   menu: {
@@ -46,9 +47,11 @@ const FullScreenMenu = (p: { open: boolean; closeDrawer: () => void }) => {
   const dispatch = useAppDispatch()
   const closeBtn = useRef<any>();
   const userRole = useAppSelector((state) => state.role)
+  const myContext = useContext(CartLength);
 
   const handleLogout = () => {
     p.closeDrawer
+    myContext.setLength(!myContext.length)
     dispatch(itemAdded({
       username: '',
     }))
@@ -57,6 +60,7 @@ const FullScreenMenu = (p: { open: boolean; closeDrawer: () => void }) => {
       {
         closeBtn.current.click()
       }
+
   }
 
   return (

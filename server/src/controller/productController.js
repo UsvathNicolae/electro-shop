@@ -37,7 +37,7 @@ const fetchAll = async (req, res) => {
     }
 };
 
-const  postProduct = async (req, res) => {
+const postProduct = async (req, res) => {
     const payload = req.body;
     try {
         const result = await postProductDB(payload);
