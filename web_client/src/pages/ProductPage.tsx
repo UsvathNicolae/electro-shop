@@ -76,27 +76,23 @@ const ProductPage = () => {
 
     return(
         <div className={styles.page}>
-            <Grid container flexDirection="row" style={{margin: 'auto', width: '50%', height: '89vh'}}>
-                <Grid item>
-                    <img alt="img" src={product?.img}/>
+            <Grid container flexDirection="row" justifyContent= 'center'  flexWrap='nowrap' style={{margin: 'auto', width: '80%', height: '88vh'}}>
+                <Grid item marginTop = "5vh">
+                    <img height= "500" alt="img" src={product?.img}/>
                 </Grid>
-                <Grid item style={{marginLeft: '20px'}}>
+                <Grid item style={{marginLeft: '20px', marginTop: "15vh"}}>
                     <Grid container flexDirection="column">
                         <Grid item style={{padding: '5px'}}>
-                            <Typography>
+                            <Typography variant = "h2" color = "#04243c">
                                 {product.title}
                             </Typography>
                         </Grid>
                         <Grid item style={{padding: '5px'}}>
-                            <Typography>
+                            <Typography variant = "h4" color = "gray">
                                 {product.description}
                             </Typography>
                         </Grid>
-                        <Grid item style={{padding: '5px'}}>
-                            <Typography>
-                                Price: {product.price} RON
-                            </Typography>
-                        </Grid>
+
                         <Grid item style={{padding: '5px'}}>
                             <Typography>
                                 Quantity: {product.quantity}
@@ -110,6 +106,11 @@ const ProductPage = () => {
                                     :
                                         'Out of stock'
                                 }
+                            </Typography>
+                        </Grid>
+                        <Grid item style={{padding: '5px'}}>
+                            <Typography>
+                                Price: {product.price} RON
                             </Typography>
                         </Grid>
                         <Grid item style={{padding: '5px'}}>
