@@ -18,6 +18,7 @@ type CustomInputProps = {
     value: string | undefined,
     placeholderText: string,
     onChangeText: (val: string) => void,
+    isPassword?: boolean
 }
 
 export function CustomTextInput(p: CustomInputProps) {
@@ -28,6 +29,7 @@ export function CustomTextInput(p: CustomInputProps) {
             placeholder={p.placeholderText}
             placeholderTextColor="gray"
             ref={inputRef}
+            secureTextEntry={p.isPassword}
             onChangeText={p.onChangeText}
             style={{
                 marginLeft: 10,
