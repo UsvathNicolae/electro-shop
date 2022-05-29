@@ -1,45 +1,24 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard, AsyncStorage } from "react-native";
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { CustomTextInput } from "../components/custom-text-input";
-import { px, useAppNavigation } from "../hooks/utils";
+import { useAuthService } from "../contexts/auth-context";
+import { px } from "../hooks/utils";
 
-type RegInfo<T> = {
+export type RegInfo<T> = {
     email: T,
     password: T
 }
 
 export function Login() {
-    const nav = useAppNavigation();
     const [regInfo, setRegInfo] = useState<RegInfo<string>>();
-    const [error, setError] = useState(false);
+    const { login, error } = useAuthService();
 
-    const onChangeUsername = (val: string) => {
+    const onChangeEmail = (val: string) => {
         setRegInfo({ ...regInfo!, email: val });
     }
 
     const onChangePassword = (val: string) => {
         setRegInfo({ ...regInfo!, password: val });
-    }
-
-    const login = async (regInfo: RegInfo<string>) => {
-        await fetch("http://localhost:8080/user/login", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(regInfo),
-        }).then((data) => data.json()).then((result) => {
-            console.log(result)
-            if(result.token){
-                AsyncStorage.setItem('token', result.token);
-            }
-            if(result.message){
-                nav.navigate("OrderList");
-            }else{
-                setError(true);
-            }
-
-        }).catch((error) => {
-            console.log("eroare", error)
-        })
     }
 
     return <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
@@ -49,11 +28,12 @@ export function Login() {
                 <View style={{ marginTop: 20 }}></View>
                 <CustomTextInput
                     value={regInfo?.email}
-                    onChangeText={onChangeUsername}
-                    placeholderText="Enter your username"
+                    onChangeText={onChangeEmail}
+                    placeholderText="Enter your email"
                     key={0}
                 />
                 <CustomTextInput
+                    isPassword
                     value={regInfo?.password}
                     onChangeText={onChangePassword}
                     placeholderText="Enter your password"
