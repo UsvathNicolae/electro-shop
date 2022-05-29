@@ -1,43 +1,49 @@
-import React, { useRef } from "react";
-import { TouchableOpacity, View, Image, Text } from "react-native";
-import { px } from "../hooks/utils";
-import Carousel from "pinar";
+import React, { useState } from "react";
+import { View, Text } from "react-native";
+import { px, useEffectAsync } from "../hooks/utils";
+import { useRoute } from "@react-navigation/native";
+import { useAuthService } from "../contexts/auth-context";
+import { OrderType } from "./order-list";
+import moment from "moment";
 
-function Order() {
+export function SingleOrder() {
+  const route = useRoute();
+  const params = route.params as { orderId: string };
+  const { loginInfo } = useAuthService();
+  const [singleOrder, setSingleOrder] = useState<OrderType>();
+
+  useEffectAsync(async () => {
+    if (params.orderId) {
+      await fetch(`http://192.168.1.194:8080/order/get/${params.orderId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${loginInfo?.token}`
+        }
+      }).then((data) => {
+        return data.json();
+      }).then((result) => setSingleOrder(result)).catch((error) => {
+        console.log("error: ", error)
+      })
+    }
+  }, [params.orderId])
 
   return <View style={{ flex: 1, backgroundColor: "white", }}>
     <View style={{ flexGrow: 0.1, alignItems: "center", justifyContent: "center" }}>
-      <TouchableOpacity>
-        <Image source={require("../../assets/phone.jpg")} style={{ width: px(300), height: px(300) }} />
-      </TouchableOpacity>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center" }}>ORDER: {params.orderId}</Text>
+      </View>
     </View>
     <View style={{ flexGrow: 1, backgroundColor: "#f3f9fe", borderTopEndRadius: px(50), borderTopLeftRadius: px(50) }}>
       <View style={{ flex: 1, margin: px(80), flexDirection: "column" }}>
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-          <Text style={{ fontWeight: "bold", fontSize: px(18) }}>Product Name</Text>
+          <Text style={{ fontWeight: "bold", fontSize: px(18) }}>Order date: {moment(singleOrder?.createdAt).format("D MMMM, YYYY")}</Text>
         </View>
-        <Text style={{ marginTop: px(10), fontSize: px(14), color: "gray" }}>Product Description</Text>
+        <Text style={{ fontSize: px(16), marginTop: px(10) }}>Time: {moment(singleOrder?.createdAt).format("hh:mm A")}</Text>
         <View style={{ marginTop: px(25), flexDirection: "row", borderStyle: "solid", justifyContent: "space-between", padding: px(20), borderWidth: 1, borderColor: "lightgray", borderRadius: px(10) }}>
-          <Text>Price</Text>
-          <Text style={{ fontWeight: "bold" }}>89$</Text>
+          <Text>Total price</Text>
+          <Text style={{ fontWeight: "bold" }}>{singleOrder?.totalPrice}$</Text>
         </View>
       </View>
     </View>
   </View>
-}
-
-export function SingleOrder() {
-  const carouselRef = useRef<Carousel>(null);
-  const orders = [1, 1, 1]
-  // @ts-ignore
-  return <Carousel
-    autoplay={false}
-    loop={false}
-    key={Math.random()}
-    ref={carouselRef}
-    dotStyle={{ backgroundColor: "#e3e3f0", width: px(10), height: px(10), borderRadius: px(5), margin: px(5) }}
-    activeDotStyle={{ backgroundColor: "#2981ff", width: px(10), height: px(10), borderRadius: px(5), margin: px(5) }}
-  >
-    {orders.map((item, index) => <Order key={index} />)}
-  </Carousel>
 }
