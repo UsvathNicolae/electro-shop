@@ -21,7 +21,8 @@ function useCreateAuthService() {
     const [error, setError] = useState(false);
 
     const login = async (regInfo: RegInfo<string>) => {
-        await fetch("http://192.168.1.194:8080/user/login", {
+        // if it is not working please change localhost to your internal IPv4 address
+        await fetch("localhost:8080/user/login", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(regInfo),
