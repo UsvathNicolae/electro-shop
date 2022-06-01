@@ -29,6 +29,13 @@ Database:
 
 Run `yarn start`
 
+### Mobile
+
+Install `Expo Go` app on your smartphone
+
+Run `yarn start` in the mobile directory
+
+Scan QR code with Expo Go app for android and with your phone's camera for iOS
 
 ### Backend
 
