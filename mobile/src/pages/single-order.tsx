@@ -14,7 +14,8 @@ export function SingleOrder() {
 
   useEffectAsync(async () => {
     if (params.orderId) {
-      await fetch(`http://192.168.1.194:8080/order/get/${params.orderId}`, {
+      // if it is not working please change localhost to your internal IPv4 address
+      await fetch(`http://localhost:8080/order/get/${params.orderId}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${loginInfo?.token}`
