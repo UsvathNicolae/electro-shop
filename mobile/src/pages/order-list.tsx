@@ -18,7 +18,8 @@ export function OrderList() {
     const { loginInfo, setLoginInfo } = useAuthService();
     const [orders, setOrders] = useState<OrderType[]>();
     useEffectAsync(async () => {
-        await fetch("http://192.168.1.194:8080/order/get", {
+        // if it is not working please change localhost to your internal IPv4 address
+        await fetch("http://localhost:8080/order/get", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${loginInfo?.token}`
